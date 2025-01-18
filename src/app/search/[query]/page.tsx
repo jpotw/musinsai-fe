@@ -7,7 +7,7 @@ import {
 import SearchVideoSearchBar from '@/components/search/search-video-search-bar';
 import { Goods } from "@/types/goods";
 import ProductCard from '@/components/search/product-card';
-import { fetchGoods } from '@/app/api/goods/search/[query]/route';
+import { fetchGoods } from '@/app/api/goods/search/utils';
 
 function SearchResults({ products, searchQuery }: { products: Goods[], searchQuery: string }) {
   if (products.length === 0) {
