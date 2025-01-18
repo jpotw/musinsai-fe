@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
+import { Suspense } from 'react';
+import Loading from '@/components/loading';
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -21,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={`${poppins.variable} font-poppins antialiased`}>
         <header className="fixed top-0 left-0 px-12 py-6 z-50">
           <Link 
@@ -31,7 +33,9 @@ export default function RootLayout({
             m<span className="text-purple-500">ai</span>.
           </Link>
         </header>
-        {children}
+        <Suspense fallback={<Loading />}>
+          {children}
+        </Suspense>
       </body>
     </html>
   );

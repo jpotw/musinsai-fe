@@ -3,7 +3,7 @@
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import FixedSearchVideoSearchBar from "@/components/home/fixed-search-bar";
-import Loading from './loading';
+import Loading from '../components/loading';
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 20 },
