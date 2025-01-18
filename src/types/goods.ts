@@ -4,6 +4,21 @@ interface InfoLabel {
   color: string;
 }
 
+interface ImageLabel {
+  code: string;
+  text: string;
+}
+
+interface Tracker {
+  url: string;
+  type?: string;
+}
+
+interface Snap {
+  id?: number;
+  url?: string;
+}
+
 export interface Goods {
   goodsNo: number;
   goodsName: string;
@@ -22,9 +37,9 @@ export interface Goods {
   isOptionVisible: boolean;
   isAd: boolean;
   infoLabelList: InfoLabel[];
-  imageLabelList: any[];
-  clickTrackers: any[];
-  impressionTrackers: any[];
-  snap: any;
+  imageLabelList: ImageLabel[];
+  clickTrackers: Tracker[];
+  impressionTrackers: Tracker[];
+  snap: Snap;
   score: number;
 }

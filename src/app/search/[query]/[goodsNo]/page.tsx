@@ -1,6 +1,6 @@
 import { Goods } from '@/types/goods';
-import { fetchGoodsReviews } from '@/app/api/reviews/[goodsNo]/route';
-import { fetchGoods } from '@/app/api/goods/search/[query]/route';
+import { fetchGoodsReviews } from '@/app/api/reviews/utils';
+import { fetchGoods } from '@/app/api/goods/search/utils';
 import GoodsDetailClient from './GoodsDetailClient';
 
 export default async function GoodsDetailPage({
@@ -25,7 +25,7 @@ export default async function GoodsDetailPage({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-blue-50 to-green-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-800">
-      <GoodsDetailClient initialData={goods} reviewStats={reviews} goodsNo={resolvedParams.goodsNo} />
+      <GoodsDetailClient initialData={goods} reviewStats={reviews} />
     </div>
   );
 }

@@ -3,22 +3,19 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ReviewStats } from '@/types/review';
-import Loading from '@/components/loading';
 import { Goods } from '@/types/goods';
 import ReviewStatistics from '@/components/review/review-statistics';
 
 interface GoodsDetailClientProps {
   initialData: Goods;
-  goodsNo: string;
   reviewStats: ReviewStats;
 }
 
 export default function GoodsDetailClient({ 
   initialData,
-  goodsNo,
   reviewStats: initialReviewStats
 }: GoodsDetailClientProps) {
-  const [reviewStats, setReviewStats] = useState<ReviewStats>(initialReviewStats);
+  const [reviewStats] = useState<ReviewStats>(initialReviewStats);
   const router = useRouter();
 
   return (
