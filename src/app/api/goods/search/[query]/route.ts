@@ -1,33 +1,24 @@
-import { Goods } from '@/types/goods';
+import { NextResponse } from 'next/server';
+import { fetchGoods } from '../utils';
 
-export interface SearchResponse {
-  data: {
-    list: Goods[];
-  };
-}
+type Props = {
+  params: Promise<{
+    query: string;
+  }>;
+};
 
-export async function fetchGoods(query: string): Promise<SearchResponse> {
-    const params = new URLSearchParams({
-      gf: 'A',
-      keyword: query,
-      sortCode: 'POPULAR',
-      page: '1',
-      size: '30',
-      caller: 'SEARCH'
-    });
-  
-    const url = `${process.env.MUSINSA_BASE_API_URL}/api2/dp/v1/plp/goods?${params}`;
-    
-    try {
-      const response = await fetch(url, {
-        next: { revalidate: 3600 }
-      });
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return await response.json();
-    } catch (error) {
-      console.error('Error fetching goods:', error);
-      throw error;
-    }
-  } 
+export async function GET(
+  request: Request,
+  { params }: Props
+) {
+  const resolvedParams = await params;
+  try {
+    const data = await fetchGoods(resolvedParams.query);
+    return NextResponse.json(data);
+  } catch {
+    return NextResponse.json(
+      { error: 'Failed to fetch goods' },
+      { status: 500 }
+    );
+  }
+} 
