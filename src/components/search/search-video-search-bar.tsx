@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { toast } from "sonner";
@@ -17,6 +18,7 @@ const FormSchema = z.object({
 
 export default function SearchVideoSearchBar() {
     const [isFocused, setIsFocused] = useState(false);
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -26,15 +28,8 @@ export default function SearchVideoSearchBar() {
     });
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
-
         toast(data.query + " 검색 중 ...");
-
-        // if (result.error) {
-        //      toast.error(result.error || "검색 중 오류가 발생했습니다.");
-        //     }
-        // } else {
-        //     toast.error("예기치 않은 오류가 발생했습니다.");
-        // }
+        router.push(`/search/${data.query}`, {scroll:false});
     }
 
     return (
